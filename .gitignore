@@ -1,0 +1,22 @@
+# OS generated files
+.DS_Store
+ehthumbs.db
+Icon?
+Thumbs.db
+
+# Logs
+logs
+*.log
+
+# Node Files
+node_modules
+
+# Typing
+typings
+
+# IDE
+.idea/
+*.swp
+
+# Built files
+dist/

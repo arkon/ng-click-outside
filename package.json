@@ -1,0 +1,45 @@
+{
+  "name": "ng2-click-outside",
+  "version": "0.0.1",
+  "description": "Angular 2 event handler directive for clicking outside an element.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arkon/ng2-click-outside.git"
+  },
+  "author": "Eugene Cheung",
+  "license": "MIT",
+  "scripts": {
+    "start": "typings install && node server"
+  },
+  "dependencies": {
+    "@angular/core": "^2.0.0-rc.1",
+    "@angular/platform-browser-dynamic": "^2.0.0-rc.1",
+    "es6-shim": "^0.35.1",
+    "express": "^4.13.4",
+    "reflect-metadata": "0.1.3",
+    "rxjs": "5.0.0-beta.6",
+    "zone.js": "^0.6.12"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.3.6",
+    "connect-history-api-fallback": "^1.2.0",
+    "copy-webpack-plugin": "^3.0.1",
+    "css-loader": "^0.23.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.8.5",
+    "html-loader": "^0.4.3",
+    "html-webpack-plugin": "^2.21.0",
+    "node-sass": "^3.7.0",
+    "postcss-loader": "^0.9.1",
+    "raw-loader": "0.5.1",
+    "sass-loader": "^3.2.0",
+    "style-loader": "^0.13.1",
+    "ts-helpers": "^1.1.1",
+    "ts-loader": "^0.8.2",
+    "typescript": "^1.8.10",
+    "typings": "^1.1.0",
+    "webpack": "^1.13.1",
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-hot-middleware": "^2.10.0"
+  }
+}

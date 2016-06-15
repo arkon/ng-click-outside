@@ -3,12 +3,9 @@
 _More info coming soon_
 
 
-## Prerequisites
+## Running the demo
 
-- Node 6+
-
-
-## Running the app
+You'll need Node 6+ installed.
 
 ```shell
 npm install

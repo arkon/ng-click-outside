@@ -8,15 +8,12 @@ Thumbs.db
 logs
 *.log
 
-# Node Files
+# Node files
 node_modules
 
 # Typing
 typings
 
-# IDE
-.idea/
-*.swp
-
-# Built files
-dist/
+# Built demo files
+demo/public/style.css
+demo/public/bundle.js

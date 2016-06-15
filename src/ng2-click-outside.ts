@@ -6,7 +6,7 @@ import { Directive, Output, EventEmitter, ViewContainerRef } from '@angular/core
     '(body:click)': '_onClick($event)'
   }
 })
-export class ClickOutsideDirective {
+export class ClickOutside {
   @Output()
   public clickOutside: EventEmitter<Event> = new EventEmitter<Event>();
 

@@ -3,15 +3,14 @@
     "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",
+    "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "noEmitHelpers": true,
-    "declaration": true,
-    "outDir": "dist/"
+    "removeComments": false,
+    "noEmitHelpers": true
   },
-  "files": [
-    "src/ng2-click-outside.ts",
-    "typings/index.d.ts"
+  "exclude": [
+    "node_modules"
   ],
   "compileOnSave": false,
   "buildOnSave": false

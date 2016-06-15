@@ -6,17 +6,34 @@
     "type": "git",
     "url": "https://github.com/arkon/ng2-click-outside.git"
   },
+  "homepage": "https://github.com/arkon/ng2-click-outside",
+  "bugs": {
+    "url": "https://github.com/arkon/ng2-click-outside/issues"
+  },
+  "files": [
+    "src/*",
+    "dist/*"
+  ],
   "author": "Eugene Cheung",
   "license": "MIT",
+  "keywords": [
+    "angular",
+    "angular2",
+    "click",
+    "event",
+    "outside",
+    "handler"
+  ],
   "main": "./dist/ng2-click-outside.js",
   "typings": "./dist/ng2-click-outside.d.ts",
   "scripts": {
-    "start": "tsc --p ./tsconfig.json"
+    "start": "typings install && tsc --p ./tsconfig.json"
   },
   "peerDependencies": {
     "@angular/core": "^2.0.0-rc.0"
   },
   "devDependencies": {
-    "typescript": "^1.8.10"
+    "typescript": "^1.8.10",
+    "typings": "^1.2.0"
   }
 }

@@ -10,7 +10,7 @@
   "license": "MIT",
   "scripts": {
     "postinstall": "typings install",
-    "sass": "node-sass src/style/style.scss public/styles.css --output-style compressed",
+    "sass": "node-sass src/style/style.scss public/style.css --output-style compressed",
     "start": "npm run sass && webpack-dev-server --progress --colors",
     "build": "npm run sass && webpack"
   },

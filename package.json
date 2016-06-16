@@ -1,6 +1,6 @@
 {
   "name": "ng2-click-outside",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A simple Angular 2 directive for handling click events outside of an element.",
   "repository": {
     "type": "git",

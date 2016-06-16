@@ -3,7 +3,7 @@ import { Directive, Output, EventEmitter, ViewContainerRef } from '@angular/core
 @Directive({
   selector: '[clickOutside]',
   host: {
-    '(body:click)': '_onClick($event)'
+    '(document:click)': '_onClick($event)'
   }
 })
 export class ClickOutside {

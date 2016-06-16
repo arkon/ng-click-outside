@@ -4,61 +4,28 @@
   padding: 0;
 }
 
-html {
-  min-height: 100%;
-}
-
 html,
 body {
+  height: 100%;
   width: 100%;
 }
 
 body {
   background: $light-grey;
   color: $dark-grey;
-  display: flex;
-  flex-flow: column;
   font: 400 1em/1.25 $fonts;
-  min-height: 100vh;
 }
 
 ::selection {
-  background-color: $pink;
+  background-color: $green;
   color: $white;
 }
 
 a {
-  color: $pink;
+  color: $green;
   text-decoration: none;
-}
 
-h1,
-h2,
-h3 {
-  font-weight: 700;
-  margin-bottom: 0.25rem;
-}
-
-h1 {
-  font-size: 2.25rem;
-}
-
-h2 {
-  font-size: 1.95rem;
-}
-
-h3 {
-  font-size: 1.8rem;
-}
-
-p + p {
-  margin-top: 0.5em;
-}
-
-button {
-  background: $light-grey;
-  border: 1px solid $dark-grey;
-  cursor: pointer;
-  font: inherit;
-  padding: 0.25em 0.5em;
+  &:hover {
+    border-bottom: 1px dotted $green;
+  }
 }

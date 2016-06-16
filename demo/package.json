@@ -12,7 +12,8 @@
     "postinstall": "typings install",
     "sass": "node-sass src/style/style.scss public/style.css --output-style compressed",
     "start": "npm run sass && webpack-dev-server --progress --colors",
-    "build": "npm run sass && webpack"
+    "build": "npm run sass && webpack",
+    "deploy": "npm run build && gh-pages -d public"
   },
   "engines": {
     "node": ">=6"
@@ -30,6 +31,7 @@
     "zone.js": "^0.6.12"
   },
   "devDependencies": {
+    "gh-pages": "^0.11.0",
     "node-sass": "^3.7.0",
     "ts-helpers": "^1.1.1",
     "ts-loader": "^0.8.2",

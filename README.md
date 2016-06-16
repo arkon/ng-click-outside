@@ -1,14 +1,38 @@
+[![npm version](http://img.shields.io/npm/v/ng2-click-outside.svg)](https://www.npmjs.com/package/ng2-click-outside)
+
 # ng2-click-outside
 
-_More info coming soon_
+A simple Angular 2 directive for handling click events _outside_ of an element.
 
+Similar to a regular `click` event, you can do something like this:
 
-## Running the demo
-
-You'll need Node 6+ installed.
-
-```shell
-npm install
-npm start
+```HTML
+<div (clickOutside)="onClickedOutside($event)">My element</div>
 ```
 
+
+## Installation
+
+```shell
+npm install --save ng2-click-outside
+```
+
+## Usage
+
+```typescript
+import { ClickOutside } from 'ng2-click-outside';
+
+@Component({
+  selector: 'app',
+  directives: [ClickOutside],
+  template: `
+    <div (clickOutside)="onClickedOutside($event)">Click outside this</div>
+  `
+})
+export class AppComponent {
+  onClickedOutside(e) {
+    console.log('clicked outside:', e);
+  }
+}
+
+```

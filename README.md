@@ -4,7 +4,7 @@
 
 **[Demo](http://echeung.me/ng2-click-outside/)**
 
-A simple Angular 2 directive for handling click events _outside_ of an element.
+Angular 2 directive for handling click events outside an element.
 
 Like binding to a regular Angular 2 `click` event, you can do something like this:
 

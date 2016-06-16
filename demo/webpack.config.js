@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   entry: [
@@ -24,6 +25,20 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new webpack.NoErrorsPlugin(),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      compressor: {
+        warnings: false,
+        screw_ie8: true
+      },
+      output: {
+        comments: false
+      }
+    })
+  ],
   devServer: {
     contentBase: path.resolve(__dirname, 'public'),
     stats: { chunkModules: false },

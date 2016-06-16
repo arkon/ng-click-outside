@@ -14,12 +14,15 @@ var ClickOutside = (function () {
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
     ], ClickOutside.prototype, "clickOutside", void 0);
+    __decorate([
+        core_1.HostListener('document:click', ['$event']), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', [Event]), 
+        __metadata('design:returntype', void 0)
+    ], ClickOutside.prototype, "_onClick", null);
     ClickOutside = __decorate([
         core_1.Directive({
-            selector: '[clickOutside]',
-            host: {
-                '(body:click)': '_onClick($event)'
-            }
+            selector: '[clickOutside]'
         }), 
         __metadata('design:paramtypes', [core_1.ViewContainerRef])
     ], ClickOutside);

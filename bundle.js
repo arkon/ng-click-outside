@@ -10111,9 +10111,9 @@
 	"use strict";
 	var core_1 = __webpack_require__(30);
 	var platform_browser_dynamic_1 = __webpack_require__(138);
-	var app_component_1 = __webpack_require__(352);
+	var demo_component_1 = __webpack_require__(352);
 	core_1.enableProdMode();
-	platform_browser_dynamic_1.bootstrap(app_component_1.AppComponent);
+	platform_browser_dynamic_1.bootstrap(demo_component_1.DemoComponent);
 
 
 /***/ },
@@ -56587,23 +56587,29 @@
 	"use strict";
 	var core_1 = __webpack_require__(30);
 	var ng2_click_outside_1 = __webpack_require__(353);
-	var AppComponent = (function () {
-	    function AppComponent() {
+	var DemoComponent = (function () {
+	    function DemoComponent() {
+	        this.status = 'Click outside this';
 	    }
-	    AppComponent.prototype.onClickedOutside = function (e) {
-	        console.log('app:', e);
+	    DemoComponent.prototype.onClick = function (e) {
+	        console.info('Clicked inside:', e);
+	        this.status = 'Clicked inside';
 	    };
-	    AppComponent = __decorate([
+	    DemoComponent.prototype.onClickedOutside = function (e) {
+	        console.info('Clicked outside:', e);
+	        this.status = 'Clicked outside';
+	    };
+	    DemoComponent = __decorate([
 	        core_1.Component({
-	            selector: 'app',
+	            selector: 'demo',
 	            directives: [ng2_click_outside_1.ClickOutside],
-	            template: "\n    <div (clickOutside)=\"onClickedOutside($event)\">Click outside this</div>\n  "
+	            template: "\n    <div\n      (click)=\"onClick($event)\"\n      (clickOutside)=\"onClickedOutside($event)\"\n      [innerHTML]=\"status\">\n    </div>\n  "
 	        }), 
 	        __metadata('design:paramtypes', [])
-	    ], AppComponent);
-	    return AppComponent;
+	    ], DemoComponent);
+	    return DemoComponent;
 	}());
-	exports.AppComponent = AppComponent;
+	exports.DemoComponent = DemoComponent;
 
 
 /***/ },

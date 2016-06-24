@@ -2,12 +2,14 @@ import {
   Directive,
   Output,
   EventEmitter,
-  ViewContainerRef,
-  HostListener
+  ViewContainerRef
 } from '@angular/core';
 
 @Directive({
-  selector: '[clickOutside]'
+  selector: '[clickOutside]',
+  host: {
+    '(document:click)': '_onClickDocument($event)'
+  }
 })
 export class ClickOutside {
   @Output()
@@ -16,8 +18,7 @@ export class ClickOutside {
   constructor(private _viewRef: ViewContainerRef) {
   }
 
-  @HostListener('document:click', ['$event'])
-  private _onClick(e: Event) {
+  private _onClickDocument(e: Event) {
     if (!this._viewRef.element.nativeElement.contains(e.target)) {
       this.clickOutside.emit(e);
     }

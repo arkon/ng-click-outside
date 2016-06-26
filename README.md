@@ -4,7 +4,8 @@
 
 **[Demo](http://echeung.me/ng2-click-outside/)**
 
-Angular 2 directive for handling click events outside an element.
+Angular 2 directive for handling click events outside an element. Useful for things like reacting to clicking
+outside of a dropdown menu or modal dialog.
 
 Like binding to a regular Angular 2 `click` event, you can do something like this:
 
@@ -43,7 +44,6 @@ export class AppComponent {
 
 #### `attachOutsideOnClick`
 
-By default, the outside click event handler is automatically. You can explicitely set
-`[attachOutsideOnClick]="true"` so that the handler is only set when the element that
-`(clickOutside)` is on is clicked. The outside click event handler will then be removed
-after a click outside has occurred.
+By default, the outside click event handler is automatically. You can explicitely set `[attachOutsideOnClick]="true"`
+so that the handler is only set when the element that `(clickOutside)` is on is clicked. The outside click event
+handler will then be removed after a click outside has occurred.

@@ -1,6 +1,6 @@
 # ng2-click-outside
 
-[![npm version](http://img.shields.io/npm/v/ng2-click-outside.svg)](https://www.npmjs.com/package/ng2-click-outside)
+[![NPM](https://nodei.co/npm/ng2-click-outside.png?compact=true)](https://nodei.co/npm/ng2-click-outside/)
 
 **[Demo](http://echeung.me/ng2-click-outside/)**
 

@@ -20,6 +20,9 @@ demo {
   margin: 2em auto;
   max-width: 800px;
   padding: 2em;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 
 a {

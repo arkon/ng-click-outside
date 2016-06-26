@@ -1,17 +1,17 @@
 import {
-  OnInit,
-  OnDestroy,
   Directive,
-  Input,
-  Output,
   EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges,
   ViewContainerRef
 } from '@angular/core';
 
-@Directive({
-  selector: '[clickOutside]'
-})
-export class ClickOutside implements OnInit, OnDestroy {
+@Directive({ selector: '[clickOutside]' })
+export class ClickOutside implements OnInit, OnDestroy, OnChanges {
   @Input() attachOutsideOnClick: boolean = false;
   @Output() clickOutside: EventEmitter<Event> = new EventEmitter<Event>();
 
@@ -21,11 +21,7 @@ export class ClickOutside implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    if (this.attachOutsideOnClick) {
-      this._viewRef.element.nativeElement.addEventListener('click', this._initOnClickBody);
-    } else {
-      this._initOnClickBody();
-    }
+    this._init();
   }
 
   ngOnDestroy() {
@@ -34,6 +30,20 @@ export class ClickOutside implements OnInit, OnDestroy {
     }
 
     document.body.removeEventListener('click', this._onClickBody);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['attachOutsideOnClick'].previousValue !== changes['attachOutsideOnClick'].currentValue) {
+      this._init();
+    }
+  }
+
+  private _init() {
+    if (this.attachOutsideOnClick) {
+      this._viewRef.element.nativeElement.addEventListener('click', this._initOnClickBody);
+    } else {
+      this._initOnClickBody();
+    }
   }
 
   private _initOnClickBody() {

@@ -7,21 +7,23 @@ import { ClickOutside } from 'ng2-click-outside';
   template: `
     <div
       (click)="onClick($event)"
-      (clickOutside)="onClickedOutside($event)"
-      [innerHTML]="status">
+      (clickOutside)="onClickedOutside($event)">
+      <p>Clicked inside: {{countInside}}</p>
+      <p>Clicked outside: {{countOutside}}</p>
     </div>
   `
 })
 export class DemoComponent {
-  private status: string = 'Click outside this';
+  private countInside: number = 0;
+  private countOutside: number = 0;
 
   private onClick(e) {
     console.info('Clicked inside:', e);
-    this.status = 'Clicked inside';
+    this.countInside++;
   }
 
   private onClickedOutside(e) {
     console.info('Clicked outside:', e);
-    this.status = 'Clicked outside';
+    this.countOutside++;
   }
 }

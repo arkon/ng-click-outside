@@ -33,8 +33,17 @@ import { ClickOutside } from 'ng2-click-outside';
   `
 })
 export class AppComponent {
-  onClickedOutside(e) {
+  onClickedOutside(e: Event) {
     console.log('clicked outside:', e);
   }
 }
 ```
+
+### Options
+
+#### `attachOutsideOnClick`
+
+By default, the outside click event handler is automatically. You can explicitely set
+`[attachOutsideOnClick]="true"` so that the handler is only set when the element that
+`(clickOutside)` is on is clicked. The outside click event handler will then be removed
+after a click outside has occurred.

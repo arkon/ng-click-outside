@@ -1,9 +1,9 @@
-import { EventEmitter, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewContainerRef } from '@angular/core';
+import { ElementRef, EventEmitter, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 export declare class ClickOutside implements OnInit, OnDestroy, OnChanges {
-    private _viewRef;
+    private _el;
     attachOutsideOnClick: boolean;
     clickOutside: EventEmitter<Event>;
-    constructor(_viewRef: ViewContainerRef);
+    constructor(_el: ElementRef);
     ngOnInit(): void;
     ngOnDestroy(): void;
     ngOnChanges(changes: SimpleChanges): void;

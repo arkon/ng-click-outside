@@ -1,13 +1,13 @@
 import {
   Directive,
+  ElementRef,
   EventEmitter,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
   Output,
-  SimpleChanges,
-  ViewContainerRef
+  SimpleChanges
 } from '@angular/core';
 
 @Directive({ selector: '[clickOutside]' })
@@ -15,7 +15,7 @@ export class ClickOutside implements OnInit, OnDestroy, OnChanges {
   @Input() attachOutsideOnClick: boolean = false;
   @Output() clickOutside: EventEmitter<Event> = new EventEmitter<Event>();
 
-  constructor(private _viewRef: ViewContainerRef) {
+  constructor(private _el: ElementRef) {
     this._initOnClickBody = this._initOnClickBody.bind(this);
     this._onClickBody = this._onClickBody.bind(this);
   }
@@ -26,7 +26,7 @@ export class ClickOutside implements OnInit, OnDestroy, OnChanges {
 
   ngOnDestroy() {
     if (this.attachOutsideOnClick) {
-      this._viewRef.element.nativeElement.removeEventListener('click', this._initOnClickBody);
+      this._el.nativeElement.removeEventListener('click', this._initOnClickBody);
     }
 
     document.body.removeEventListener('click', this._onClickBody);
@@ -40,7 +40,7 @@ export class ClickOutside implements OnInit, OnDestroy, OnChanges {
 
   private _init() {
     if (this.attachOutsideOnClick) {
-      this._viewRef.element.nativeElement.addEventListener('click', this._initOnClickBody);
+      this._el.nativeElement.addEventListener('click', this._initOnClickBody);
     } else {
       this._initOnClickBody();
     }
@@ -51,7 +51,7 @@ export class ClickOutside implements OnInit, OnDestroy, OnChanges {
   }
 
   private _onClickBody(e: Event) {
-    if (!this._viewRef.element.nativeElement.contains(e.target)) {
+    if (!this._el.nativeElement.contains(e.target)) {
       this.clickOutside.emit(e);
 
       if (this.attachOutsideOnClick) {

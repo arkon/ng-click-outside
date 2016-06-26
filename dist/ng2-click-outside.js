@@ -1,8 +1,8 @@
 "use strict";
 var core_1 = require('@angular/core');
 var ClickOutside = (function () {
-    function ClickOutside(_viewRef) {
-        this._viewRef = _viewRef;
+    function ClickOutside(_el) {
+        this._el = _el;
         this.attachOutsideOnClick = false;
         this.clickOutside = new core_1.EventEmitter();
         this._initOnClickBody = this._initOnClickBody.bind(this);
@@ -13,7 +13,7 @@ var ClickOutside = (function () {
     };
     ClickOutside.prototype.ngOnDestroy = function () {
         if (this.attachOutsideOnClick) {
-            this._viewRef.element.nativeElement.removeEventListener('click', this._initOnClickBody);
+            this._el.nativeElement.removeEventListener('click', this._initOnClickBody);
         }
         document.body.removeEventListener('click', this._onClickBody);
     };
@@ -24,7 +24,7 @@ var ClickOutside = (function () {
     };
     ClickOutside.prototype._init = function () {
         if (this.attachOutsideOnClick) {
-            this._viewRef.element.nativeElement.addEventListener('click', this._initOnClickBody);
+            this._el.nativeElement.addEventListener('click', this._initOnClickBody);
         }
         else {
             this._initOnClickBody();
@@ -34,7 +34,7 @@ var ClickOutside = (function () {
         document.body.addEventListener('click', this._onClickBody);
     };
     ClickOutside.prototype._onClickBody = function (e) {
-        if (!this._viewRef.element.nativeElement.contains(e.target)) {
+        if (!this._el.nativeElement.contains(e.target)) {
             this.clickOutside.emit(e);
             if (this.attachOutsideOnClick) {
                 document.body.removeEventListener('click', this._onClickBody);
@@ -51,7 +51,7 @@ var ClickOutside = (function () {
     ], ClickOutside.prototype, "clickOutside", void 0);
     ClickOutside = __decorate([
         core_1.Directive({ selector: '[clickOutside]' }), 
-        __metadata('design:paramtypes', [core_1.ViewContainerRef])
+        __metadata('design:paramtypes', [core_1.ElementRef])
     ], ClickOutside);
     return ClickOutside;
 }());

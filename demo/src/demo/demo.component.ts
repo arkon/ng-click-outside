@@ -13,7 +13,7 @@ import { ClickOutside } from 'ng2-click-outside';
       <p>Clicked outside: {{countOutside}}</p>
 
       <label>
-        <input type="checkbox" [(ngModel)]="attachOutsideOnClick" />
+        <input type="checkbox" [checked]="attachOutsideOnClick" (click)="_toggleAttachOutsideOnClick()" />
         <span>Attach on click</span>
       </label>
     </div>
@@ -24,6 +24,10 @@ export class DemoComponent {
   private countOutside: number = 0;
 
   private attachOutsideOnClick = false;
+
+  private _toggleAttachOutsideOnClick() {
+    this.attachOutsideOnClick = !this.attachOutsideOnClick;
+  }
 
   private onClick(e: Event) {
     console.info('Clicked inside:', e);

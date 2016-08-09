@@ -32,7 +32,8 @@ var ClickOutside = (function () {
         this._document.body.removeEventListener('click', this._onClickBody);
     };
     ClickOutside.prototype.ngOnChanges = function (changes) {
-        if (changes['attachOutsideOnClick'].previousValue !== changes['attachOutsideOnClick'].currentValue) {
+        if (changes['attachOutsideOnClick'] &&
+            changes['attachOutsideOnClick'].previousValue !== changes['attachOutsideOnClick'].currentValue) {
             this._init();
         }
     };

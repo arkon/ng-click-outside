@@ -8,7 +8,7 @@ import {
   OnDestroy,
   OnInit,
   Output,
-  SimpleChange
+  SimpleChanges
 } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 
@@ -36,8 +36,9 @@ export class ClickOutside implements OnInit, OnDestroy, OnChanges {
     this._document.body.removeEventListener('click', this._onClickBody);
   }
 
-  ngOnChanges(changes: { [propName: string]: SimpleChange }) {
-    if (changes['attachOutsideOnClick'].previousValue !== changes['attachOutsideOnClick'].currentValue) {
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['attachOutsideOnClick'] &&
+      changes['attachOutsideOnClick'].previousValue !== changes['attachOutsideOnClick'].currentValue) {
       this._init();
     }
   }

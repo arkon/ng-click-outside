@@ -44,6 +44,8 @@ export class AppComponent {
 
 #### `attachOutsideOnClick`
 
-By default, the outside click event handler is automatically. You can explicitely set `[attachOutsideOnClick]="true"`
-so that the handler is only set when the element that `(clickOutside)` is on is clicked. The outside click event
-handler will then be removed after a click outside has occurred.
+By default, the outside click event handler is automatically. You can explicitely set this to `true`
+so that the handler is only set when the element is clicked. The outside click event handler will
+then be removed after a click outside has occurred.
+
+Default: `false`

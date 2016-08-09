@@ -1,4 +1,4 @@
-import { ElementRef, EventEmitter, OnChanges, OnDestroy, OnInit, SimpleChange } from '@angular/core';
+import { ElementRef, EventEmitter, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 export declare class ClickOutside implements OnInit, OnDestroy, OnChanges {
     private _document;
     private _el;
@@ -7,9 +7,7 @@ export declare class ClickOutside implements OnInit, OnDestroy, OnChanges {
     constructor(_document: HTMLDocument, _el: ElementRef);
     ngOnInit(): void;
     ngOnDestroy(): void;
-    ngOnChanges(changes: {
-        [propName: string]: SimpleChange;
-    }): void;
+    ngOnChanges(changes: SimpleChanges): void;
     private _init();
     private _initOnClickBody();
     private _onClickBody(e);

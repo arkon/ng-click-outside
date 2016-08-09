@@ -8,9 +8,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 var core_1 = require('@angular/core');
+var platform_browser_1 = require('@angular/platform-browser');
 var ClickOutside = (function () {
-    function ClickOutside(_el) {
+    function ClickOutside(_document, _el) {
+        this._document = _document;
         this._el = _el;
         this.attachOutsideOnClick = false;
         this.clickOutside = new core_1.EventEmitter();
@@ -24,7 +29,7 @@ var ClickOutside = (function () {
         if (this.attachOutsideOnClick) {
             this._el.nativeElement.removeEventListener('click', this._initOnClickBody);
         }
-        document.body.removeEventListener('click', this._onClickBody);
+        this._document.body.removeEventListener('click', this._onClickBody);
     };
     ClickOutside.prototype.ngOnChanges = function (changes) {
         if (changes['attachOutsideOnClick'].previousValue !== changes['attachOutsideOnClick'].currentValue) {
@@ -40,13 +45,13 @@ var ClickOutside = (function () {
         }
     };
     ClickOutside.prototype._initOnClickBody = function () {
-        document.body.addEventListener('click', this._onClickBody);
+        this._document.body.addEventListener('click', this._onClickBody);
     };
     ClickOutside.prototype._onClickBody = function (e) {
         if (!this._el.nativeElement.contains(e.target)) {
             this.clickOutside.emit(e);
             if (this.attachOutsideOnClick) {
-                document.body.removeEventListener('click', this._onClickBody);
+                this._document.body.removeEventListener('click', this._onClickBody);
             }
         }
     };
@@ -59,8 +64,9 @@ var ClickOutside = (function () {
         __metadata('design:type', core_1.EventEmitter)
     ], ClickOutside.prototype, "clickOutside", void 0);
     ClickOutside = __decorate([
-        core_1.Directive({ selector: '[clickOutside]' }), 
-        __metadata('design:paramtypes', [core_1.ElementRef])
+        core_1.Directive({ selector: '[clickOutside]' }),
+        __param(0, core_1.Inject(platform_browser_1.DOCUMENT)), 
+        __metadata('design:paramtypes', [HTMLDocument, core_1.ElementRef])
     ], ClickOutside);
     return ClickOutside;
 }());

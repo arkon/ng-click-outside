@@ -2,6 +2,7 @@ import {
   Directive,
   ElementRef,
   EventEmitter,
+  Inject,
   Input,
   OnChanges,
   OnDestroy,
@@ -9,13 +10,16 @@ import {
   Output,
   SimpleChange
 } from '@angular/core';
+import { DOCUMENT } from '@angular/platform-browser';
 
 @Directive({ selector: '[clickOutside]' })
 export class ClickOutside implements OnInit, OnDestroy, OnChanges {
   @Input() attachOutsideOnClick: boolean = false;
   @Output() clickOutside: EventEmitter<Event> = new EventEmitter<Event>();
 
-  constructor(private _el: ElementRef) {
+  constructor(
+    @Inject(DOCUMENT) private _document: HTMLDocument,
+    private _el: ElementRef) {
     this._initOnClickBody = this._initOnClickBody.bind(this);
     this._onClickBody = this._onClickBody.bind(this);
   }
@@ -29,7 +33,7 @@ export class ClickOutside implements OnInit, OnDestroy, OnChanges {
       this._el.nativeElement.removeEventListener('click', this._initOnClickBody);
     }
 
-    document.body.removeEventListener('click', this._onClickBody);
+    this._document.body.removeEventListener('click', this._onClickBody);
   }
 
   ngOnChanges(changes: { [propName: string]: SimpleChange }) {
@@ -47,7 +51,7 @@ export class ClickOutside implements OnInit, OnDestroy, OnChanges {
   }
 
   private _initOnClickBody() {
-    document.body.addEventListener('click', this._onClickBody);
+    this._document.body.addEventListener('click', this._onClickBody);
   }
 
   private _onClickBody(e: Event) {
@@ -55,7 +59,7 @@ export class ClickOutside implements OnInit, OnDestroy, OnChanges {
       this.clickOutside.emit(e);
 
       if (this.attachOutsideOnClick) {
-        document.body.removeEventListener('click', this._onClickBody);
+        this._document.body.removeEventListener('click', this._onClickBody);
       }
     }
   }

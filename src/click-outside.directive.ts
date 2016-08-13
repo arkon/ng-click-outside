@@ -13,7 +13,7 @@ import {
 import { DOCUMENT } from '@angular/platform-browser';
 
 @Directive({ selector: '[clickOutside]' })
-export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
+export default class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
   @Input() attachOutsideOnClick: boolean = false;
   @Output() clickOutside: EventEmitter<Event> = new EventEmitter<Event>();
 

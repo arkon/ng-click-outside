@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { ClickOutside } from 'ng2-click-outside';
+import { ClickOutsideDirective } from 'ng2-click-outside';
 
 @Component({
   selector: 'demo',
-  directives: [ClickOutside],
+  directives: [ClickOutsideDirective],
   template: `
     <div
       (click)="onClick($event)"

@@ -24,11 +24,11 @@ npm install --save ng2-click-outside
 ## Usage
 
 ```typescript
-import { ClickOutside } from 'ng2-click-outside';
+import { ClickOutsideDirective } from 'ng2-click-outside';
 
 @Component({
   selector: 'app',
-  directives: [ClickOutside],
+  directives: [ClickOutsideDirective],
   template: `
     <div (clickOutside)="onClickedOutside($event)">Click outside this</div>
   `

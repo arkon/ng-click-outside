@@ -12,7 +12,7 @@
   },
   "files": [
     "src/*",
-    "dist/*"
+    "lib/*"
   ],
   "author": "Eugene Cheung",
   "license": "MIT",
@@ -24,8 +24,8 @@
     "outside",
     "handler"
   ],
-  "main": "./dist/ng2-click-outside.js",
-  "typings": "./dist/ng2-click-outside.d.ts",
+  "main": "./liib/index.js",
+  "typings": "./lib/index.d.ts",
   "scripts": {
     "start": "typings install && tsc --p ./tsconfig.json",
     "prepublish": "npm start"

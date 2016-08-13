@@ -10,7 +10,8 @@
   },
   "files": [
     "typings/index.d.ts",
-    "src/click-outside.ts"
+    "src/index.ts",
+    "src/click-outside.directive.ts"
   ],
   "compileOnSave": false,
   "buildOnSave": false

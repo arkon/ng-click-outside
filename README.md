@@ -23,6 +23,21 @@ npm install --save ng2-click-outside
 
 ## Usage
 
+Using a module:
+
+```typescript
+import { InlineSVGModule } from 'ng2-inline-svg';
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule, InlineSVGModule],
+  bootstrap: [AppComponent]
+})
+class AppModule {}
+```
+
+If you're not using the module, be sure to add the directive to your component's decorator:
+
 ```typescript
 import { ClickOutsideDirective } from 'ng2-click-outside';
 

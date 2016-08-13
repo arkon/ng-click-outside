@@ -6,11 +6,11 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "declaration": true,
-    "outDir": "dist/"
+    "outDir": "lib/"
   },
   "files": [
-    "src/ng2-click-outside.ts",
-    "typings/index.d.ts"
+    "typings/index.d.ts",
+    "src/click-outside.ts"
   ],
   "compileOnSave": false,
   "buildOnSave": false

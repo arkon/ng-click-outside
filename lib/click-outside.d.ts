@@ -1,5 +1,5 @@
 import { ElementRef, EventEmitter, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
-export declare class ClickOutside implements OnInit, OnDestroy, OnChanges {
+export declare class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
     private _document;
     private _el;
     attachOutsideOnClick: boolean;

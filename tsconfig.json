@@ -6,12 +6,11 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "declaration": true,
-    "outDir": "lib/"
+    "outDir": "lib/",
+    "lib": ["dom", "es5", "es2015.core", "es2015.collection", "es2015.promise"]
   },
-  "files": [
-    "typings/index.d.ts",
-    "src/index.ts",
-    "src/click-outside.directive.ts"
+  "include": [
+    "src/**/*"
   ],
   "compileOnSave": false,
   "buildOnSave": false

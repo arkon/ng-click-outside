@@ -43,6 +43,7 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
     }
   }
 
+  /** @internal */
   private _init() {
     if (this.attachOutsideOnClick) {
       this._el.nativeElement.addEventListener('click', this._initOnClickBody);
@@ -51,10 +52,12 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
     }
   }
 
+  /** @internal */
   private _initOnClickBody() {
     this._document.body.addEventListener('click', this._onClickBody);
   }
 
+  /** @internal */
   private _onClickBody(e: Event) {
     if (!this._el.nativeElement.contains(e.target)) {
       this.clickOutside.emit(e);

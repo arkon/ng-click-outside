@@ -16,6 +16,6 @@
   "compileOnSave": false,
   "buildOnSave": false,
   "angularCompilerOptions": {
-    "genDir": "factories"
+    "skipTemplateCodegen": true
   }
 }

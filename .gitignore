@@ -12,7 +12,6 @@ logs
 node_modules
 
 # Built files
-factories/
 lib/
 
 # Built demo files

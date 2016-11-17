@@ -90,7 +90,7 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
   /** @internal */
   private _shouldExclude(target): boolean {
     for (let i = 0; i < this._nodesExcluded.length; i++) {
-      if (this._nodesExcluded.indexOf(target) > -1) {
+      if (this._nodesExcluded[i].contains(target)) {
         return true;
       }
     }

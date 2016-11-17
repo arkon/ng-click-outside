@@ -47,7 +47,7 @@ You can then use the directive in your templates:
 })
 export class AppComponent {
   onClickedOutside(e: Event) {
-    console.log('clicked outside:', e);
+    console.log('Clicked outside:', e);
   }
 }
 ```
@@ -61,3 +61,7 @@ so that the handler is only set when the element is clicked. The outside click e
 then be removed after a click outside has occurred.
 
 Default: `false`
+
+#### `exclude`
+
+A comma-seperated string of DOM element queries to exclude when clicking outside of the element.

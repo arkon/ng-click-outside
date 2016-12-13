@@ -1,7 +1,7 @@
 import { NgModule, enableProdMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { ClickOutsideModule } from 'ng2-click-outside';
+import { ClickOutsideModule } from 'ng-click-outside';
 
 import { DemoComponent } from './demo/demo.component';
 

@@ -57,7 +57,7 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
             }
           } catch (err) {
             if (window.console) {
-              window.console.error('[ng2-click-outside] Check your exclude selector syntax.', err);
+              window.console.error('[ng-click-outside] Check your exclude selector syntax.', err);
             }
           }
         }

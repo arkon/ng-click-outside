@@ -1,8 +1,10 @@
-# ng2-click-outside
+# ng-click-outside
 
-[![NPM](https://nodei.co/npm/ng2-click-outside.png?compact=true)](https://nodei.co/npm/ng2-click-outside/)
+[![NPM](https://nodei.co/npm/ng-click-outside.png?compact=true)](https://nodei.co/npm/ng-click-outside/)
 
-**[Demo](https://echeung.me/ng2-click-outside/)**
+**[Demo](https://echeung.me/ng-click-outside/)**
+
+*Formally called [ng2-click-outside](https://github.com/arkon/ng2-click-outside)*
 
 Angular 2 directive for handling click events outside an element. Useful for things like reacting to clicking
 outside of a dropdown menu or modal dialog.
@@ -17,7 +19,7 @@ Like binding to a regular Angular 2 `click` event, you can do something like thi
 ## Installation
 
 ```shell
-npm install --save ng2-click-outside
+npm install --save ng-click-outside
 ```
 
 
@@ -26,7 +28,7 @@ npm install --save ng2-click-outside
 Add `ClickOutsideModule` to your list of module imports:
 
 ```typescript
-import { ClickOutsideModule } from 'ng2-click-outside';
+import { ClickOutsideModule } from 'ng-click-outside';
 
 @NgModule({
   declarations: [AppComponent],

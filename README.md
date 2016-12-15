@@ -66,4 +66,4 @@ Default: `false`
 
 #### `exclude`
 
-A comma-seperated string of DOM element queries to exclude when clicking outside of the element.
+A comma-seperated string of DOM element queries to exclude when clicking outside of the element. For example: `[exclude]="'button,.btn-primary'"`.

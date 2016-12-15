@@ -6,10 +6,10 @@
 
 *Formally called [ng2-click-outside](https://github.com/arkon/ng2-click-outside)*
 
-Angular 2 directive for handling click events outside an element. Useful for things like reacting to clicking
+Angular 2+ directive for handling click events outside an element. Useful for things like reacting to clicking
 outside of a dropdown menu or modal dialog.
 
-Like binding to a regular Angular 2 `click` event, you can do something like this:
+Like binding to a regular `click` event in a template, you can do something like this:
 
 ```HTML
 <div (clickOutside)="onClickedOutside($event)">My element</div>

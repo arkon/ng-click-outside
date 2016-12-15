@@ -48,20 +48,16 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
 
   private _init() {
     if (this.exclude) {
-      this.exclude.split(',').forEach((selector) => {
-        if (selector) {
-          try {
-            const node = this._document.querySelector(selector.trim());
-            if (node) {
-              this._nodesExcluded.push(node);
-            }
-          } catch (err) {
-            if (window.console) {
-              window.console.error('[ng-click-outside] Check your exclude selector syntax.', err);
-            }
-          }
+      try {
+        const nodes = this._document.querySelectorAll(this.exclude);
+        if (nodes) {
+          this._nodesExcluded = nodes;
         }
-      });
+      } catch (err) {
+        if (console) {
+          console.error('[ng-click-outside] Check your exclude selector syntax.', err);
+        }
+      }
     }
 
     if (this.attachOutsideOnClick) {

@@ -1,6 +1,6 @@
 {
   "name": "ng-click-outside-demo",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Demo of ng-click-outside.",
   "repository": {
     "type": "git",
@@ -9,7 +9,7 @@
   "author": "Eugene Cheung",
   "license": "MIT",
   "scripts": {
-    "install-lib": "npm uninstall ng2-click-outside && npm install",
+    "install-lib": "npm uninstall ng-click-outside && npm install",
     "sass": "node-sass src/style/style.scss public/style.css --output-style compressed",
     "start": "npm run sass && webpack-dev-server --progress --colors",
     "build": "npm run sass && webpack",
@@ -34,7 +34,7 @@
     "gh-pages": "^0.12.0",
     "node-sass": "^4.0.0",
     "ts-loader": "^1.3.3",
-    "typescript": "^2.1.4",
+    "typescript": "2.0.10",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2"
   }

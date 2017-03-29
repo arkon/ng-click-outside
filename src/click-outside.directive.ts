@@ -35,9 +35,11 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
   ngOnDestroy() {
     if (this.attachOutsideOnClick) {
       this._el.nativeElement.removeEventListener('click', this._initOnClickBody);
+      this._el.nativeElement.removeEventListener('touchstart', this._initOnClickBody);
     }
 
     this._document.body.removeEventListener('click', this._onClickBody);
+    this._document.body.removeEventListener('touchstart', this._onClickBody);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -62,6 +64,7 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
 
     if (this.attachOutsideOnClick) {
       this._el.nativeElement.addEventListener('click', this._initOnClickBody);
+      this._el.nativeElement.addEventListener('touchstart', this._initOnClickBody);
     } else {
       this._initOnClickBody();
     }
@@ -70,6 +73,7 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
   /** @internal */
   private _initOnClickBody() {
     this._document.body.addEventListener('click', this._onClickBody);
+    this._document.body.addEventListener('touchstart', this._onClickBody);
   }
 
   /** @internal */
@@ -79,6 +83,7 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
 
       if (this.attachOutsideOnClick) {
         this._document.body.removeEventListener('click', this._onClickBody);
+        this._document.body.removeEventListener('touchstart', this._onClickBody);
       }
     }
   }

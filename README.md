@@ -68,18 +68,20 @@ Default: `false`
 
 By default, the outside click event is triggered on `click`. This property allows for a space-separated list of events to cause the trigger.
 
-Example: For mobile support add:
+e.g. For mobile support add:
 `[clickOutsideEvents]="'click touchstart'"`
 
-Example: For mobile exclusive support add:
+e.g. For mobile exclusive support add:
 `[clickOutsideEvents]="'touchstart'"`
 
 #### `exclude`
 
-A comma-separated string of DOM element queries to exclude when clicking outside of the element. For example: `[exclude]="'button,.btn-primary'"`.
+A comma-separated string of DOM element queries to exclude when clicking outside of the element.
+
+e.g. `[exclude]="'button,.btn-primary'"`
 
 #### `excludeBeforeClick`
 
-By default clickOutside registers excluded DOM elements on init. This property refreshes the list before the clickOutside event is triggered. This is useful for ensuring that excluded elements added to the DOM after init are excluded (e.g. ng2-bootstrap popover: this allows for clicking inside the `.popover-content` area if specified in `exclude`)
+By default, `clickOutside` registers excluded DOM elements on init. This property refreshes the list before the `clickOutside` event is triggered. This is useful for ensuring that excluded elements added to the DOM after init are excluded (e.g. ng2-bootstrap popover: this allows for clicking inside the `.popover-content` area if specified in `exclude`)
 
 Default: `false`

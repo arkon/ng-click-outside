@@ -37,10 +37,10 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
 
   ngOnDestroy() {
     if (this.attachOutsideOnClick) {
-      this._events.forEach(event => this._el.nativeElement.removeEventListener(event, this._initOnClickBody));
+      this._events.forEach(e => this._el.nativeElement.removeEventListener(e, this._initOnClickBody));
     }
 
-    this._events.forEach(event => this._document.body.removeEventListener(event, this._onClickBody));
+    this._events.forEach(e => this._document.body.removeEventListener(e, this._onClickBody));
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -56,7 +56,7 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
     this._excludeCheck();
 
     if (this.attachOutsideOnClick) {
-      this._events.forEach(event => this._el.nativeElement.addEventListener(event, this._initOnClickBody));
+      this._events.forEach(e => this._el.nativeElement.addEventListener(e, this._initOnClickBody));
     } else {
       this._initOnClickBody();
     }
@@ -64,7 +64,7 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
 
   /** @internal */
   private _initOnClickBody() {
-    this._events.forEach(event => this._document.body.addEventListener(event, this._onClickBody));
+    this._events.forEach(e => this._document.body.addEventListener(e, this._onClickBody));
   }
 
   /** @internal */
@@ -83,16 +83,16 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-  private _onClickBody(e: Event) {
+  private _onClickBody(ev: Event) {
     if (this.excludeBeforeClick) {
       this._excludeCheck();
     }
-    if (!this._el.nativeElement.contains(e.target) && !this._shouldExclude(e.target)) {
-      this.clickOutside.emit(e);
+
+    if (!this._el.nativeElement.contains(ev.target) && !this._shouldExclude(ev.target)) {
+      this.clickOutside.emit(ev);
 
       if (this.attachOutsideOnClick) {
-        this._document.body.removeEventListener('click', this._onClickBody);
-        this._document.body.removeEventListener('touchstart', this._onClickBody);
+        this._events.forEach(e => this._document.body.removeEventListener(e, this._onClickBody));
       }
     }
   }

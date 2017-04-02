@@ -91,8 +91,7 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
       this.clickOutside.emit(e);
 
       if (this.attachOutsideOnClick) {
-        this._document.body.removeEventListener('click', this._onClickBody);
-        this._document.body.removeEventListener('touchstart', this._onClickBody);
+        this._events.forEach(event => this._document.body.removeEventListener(event, this._onClickBody));
       }
     }
   }

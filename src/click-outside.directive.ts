@@ -16,10 +16,13 @@ import { DOCUMENT } from '@angular/platform-browser';
 export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
   @Input() attachOutsideOnClick: boolean = false;
   @Input() exclude: string = '';
+  @Input() excludeBeforeClick: boolean = false;
+  @Input() clickOutsideEvents: string = '';
 
   @Output() clickOutside: EventEmitter<Event> = new EventEmitter<Event>();
 
   private _nodesExcluded: Array<HTMLElement> = [];
+  private _events: Array<string> = ['click'];
 
   constructor(
     @Inject(DOCUMENT) private _document /*: HTMLDocument*/,
@@ -34,12 +37,10 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
 
   ngOnDestroy() {
     if (this.attachOutsideOnClick) {
-      this._el.nativeElement.removeEventListener('click', this._initOnClickBody);
-      this._el.nativeElement.removeEventListener('touchstart', this._initOnClickBody);
+      this._events.forEach(event => this._el.nativeElement.removeEventListener(event, this._initOnClickBody));
     }
 
-    this._document.body.removeEventListener('click', this._onClickBody);
-    this._document.body.removeEventListener('touchstart', this._onClickBody);
+    this._events.forEach(event => this._document.body.removeEventListener(event, this._onClickBody));
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -49,6 +50,25 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
   }
 
   private _init() {
+    if (this.clickOutsideEvents !== '') {
+      this._events = this.clickOutsideEvents.split(' ');
+    }
+    this._excludeCheck();
+
+    if (this.attachOutsideOnClick) {
+      this._events.forEach(event => this._el.nativeElement.addEventListener(event, this._initOnClickBody));
+    } else {
+      this._initOnClickBody();
+    }
+  }
+
+  /** @internal */
+  private _initOnClickBody() {
+    this._events.forEach(event => this._document.body.addEventListener(event, this._onClickBody));
+  }
+
+  /** @internal */
+  private _excludeCheck() {
     if (this.exclude) {
       try {
         const nodes = this._document.querySelectorAll(this.exclude);
@@ -61,23 +81,12 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
         }
       }
     }
-
-    if (this.attachOutsideOnClick) {
-      this._el.nativeElement.addEventListener('click', this._initOnClickBody);
-      this._el.nativeElement.addEventListener('touchstart', this._initOnClickBody);
-    } else {
-      this._initOnClickBody();
-    }
   }
 
-  /** @internal */
-  private _initOnClickBody() {
-    this._document.body.addEventListener('click', this._onClickBody);
-    this._document.body.addEventListener('touchstart', this._onClickBody);
-  }
-
-  /** @internal */
   private _onClickBody(e: Event) {
+    if (this.excludeBeforeClick) {
+      this._excludeCheck();
+    }
     if (!this._el.nativeElement.contains(e.target) && !this._shouldExclude(e.target)) {
       this.clickOutside.emit(e);
 

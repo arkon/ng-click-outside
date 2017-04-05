@@ -21,6 +21,8 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
 
   @Output() clickOutside: EventEmitter<Event> = new EventEmitter<Event>();
 
+  private _inBrowser: boolean = typeof window !== 'undefined';
+
   private _nodesExcluded: Array<HTMLElement> = [];
   private _events: Array<string> = ['click'];
 
@@ -32,10 +34,18 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnInit() {
+    if (!this._inBrowser) {
+      return;
+    }
+
     this._init();
   }
 
   ngOnDestroy() {
+    if (!this._inBrowser) {
+      return;
+    }
+
     if (this.attachOutsideOnClick) {
       this._events.forEach(e => this._el.nativeElement.removeEventListener(e, this._initOnClickBody));
     }

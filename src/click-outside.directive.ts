@@ -54,6 +54,10 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    if (!this._inBrowser) {
+      return;
+    }
+
     if (changes['attachOutsideOnClick'] || changes['exclude']) {
       this._init();
     }

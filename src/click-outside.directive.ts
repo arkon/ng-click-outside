@@ -12,8 +12,6 @@ import {
 } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 
-import guard from 'ts-guard-decorator';
-
 @Directive({ selector: '[clickOutside]' })
 export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
   @Input() attachOutsideOnClick: boolean = false;
@@ -33,13 +31,15 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
     this._onClickBody = this._onClickBody.bind(this);
   }
 
-  @guard(typeof window !== 'undefined')
   ngOnInit() {
+    if (!this._isBrowser()) { return; }
+
     this._init();
   }
 
-  @guard(typeof window !== 'undefined')
   ngOnDestroy() {
+    if (!this._isBrowser()) { return; }
+
     if (this.attachOutsideOnClick) {
       this._events.forEach(e => this._el.nativeElement.removeEventListener(e, this._initOnClickBody));
     }
@@ -47,8 +47,9 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
     this._events.forEach(e => this._document.body.removeEventListener(e, this._onClickBody));
   }
 
-  @guard(typeof window !== 'undefined')
   ngOnChanges(changes: SimpleChanges) {
+    if (!this._isBrowser()) { return; }
+
     if (changes['attachOutsideOnClick'] || changes['exclude']) {
       this._init();
     }
@@ -111,5 +112,10 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
     }
 
     return false;
+  }
+
+  /** @internal */
+  private _isBrowser(): boolean {
+    return typeof window !== 'undefined';
   }
 }

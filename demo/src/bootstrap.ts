@@ -5,6 +5,8 @@ import { ClickOutsideModule } from 'ng-click-outside';
 
 import { DemoComponent } from './demo/demo.component';
 
+import './styles/styles.scss';
+
 enableProdMode();
 
 @NgModule({

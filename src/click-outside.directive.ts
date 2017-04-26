@@ -2,7 +2,6 @@ import {
   Directive,
   ElementRef,
   EventEmitter,
-  Inject,
   Input,
   OnChanges,
   OnDestroy,
@@ -10,7 +9,6 @@ import {
   Output,
   SimpleChanges
 } from '@angular/core';
-import { DOCUMENT } from '@angular/platform-browser';
 
 @Directive({ selector: '[clickOutside]' })
 export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
@@ -25,7 +23,6 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
   private _events: Array<string> = ['click'];
 
   constructor(
-    @Inject(DOCUMENT) private _document /*: HTMLDocument*/,
     private _el: ElementRef) {
     this._initOnClickBody = this._initOnClickBody.bind(this);
     this._onClickBody = this._onClickBody.bind(this);
@@ -44,7 +41,7 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
       this._events.forEach(e => this._el.nativeElement.removeEventListener(e, this._initOnClickBody));
     }
 
-    this._events.forEach(e => this._document.body.removeEventListener(e, this._onClickBody));
+    this._events.forEach(e => document.body.removeEventListener(e, this._onClickBody));
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -70,14 +67,14 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
 
   /** @internal */
   private _initOnClickBody() {
-    this._events.forEach(e => this._document.body.addEventListener(e, this._onClickBody));
+    this._events.forEach(e => document.body.addEventListener(e, this._onClickBody));
   }
 
   /** @internal */
   private _excludeCheck() {
     if (this.exclude) {
       try {
-        const nodes = this._document.querySelectorAll(this.exclude);
+        const nodes = Array.from(document.querySelectorAll(this.exclude)) as Array<HTMLElement>;
         if (nodes) {
           this._nodesExcluded = nodes;
         }
@@ -98,7 +95,7 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
       this.clickOutside.emit(ev);
 
       if (this.attachOutsideOnClick) {
-        this._events.forEach(e => this._document.body.removeEventListener(e, this._onClickBody));
+        this._events.forEach(e => document.body.removeEventListener(e, this._onClickBody));
       }
     }
   }

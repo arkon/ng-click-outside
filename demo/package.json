@@ -9,7 +9,7 @@
   "author": "Eugene Cheung",
   "license": "MIT",
   "scripts": {
-    "install-lib": "npm uninstall ng-click-outside && npm install",
+    "install-lib": "npm i -f ng-click-outside",
     "start": "webpack-dev-server --progress --colors",
     "build": "webpack -p --progress --colors",
     "deploy": "npm run build && gh-pages -d dist"

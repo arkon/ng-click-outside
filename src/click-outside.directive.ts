@@ -2,13 +2,16 @@ import {
   Directive,
   ElementRef,
   EventEmitter,
+  Inject,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
   Output,
+  PLATFORM_ID,
   SimpleChanges
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Directive({ selector: '[clickOutside]' })
 export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
@@ -19,23 +22,28 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
 
   @Output() clickOutside: EventEmitter<Event> = new EventEmitter<Event>();
 
+  private _isBrowser: boolean;
+
   private _nodesExcluded: Array<HTMLElement> = [];
   private _events: Array<string> = ['click'];
 
   constructor(
-    private _el: ElementRef) {
+    private _el: ElementRef,
+    @Inject(PLATFORM_ID) platformId: Object) {
+    this._isBrowser = isPlatformBrowser(platformId);
+
     this._initOnClickBody = this._initOnClickBody.bind(this);
     this._onClickBody = this._onClickBody.bind(this);
   }
 
   ngOnInit() {
-    if (!this._isBrowser()) { return; }
+    if (!this._isBrowser) { return; }
 
     this._init();
   }
 
   ngOnDestroy() {
-    if (!this._isBrowser()) { return; }
+    if (!this._isBrowser) { return; }
 
     if (this.attachOutsideOnClick) {
       this._events.forEach(e => this._el.nativeElement.removeEventListener(e, this._initOnClickBody));
@@ -45,7 +53,7 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (!this._isBrowser()) { return; }
+    if (!this._isBrowser) { return; }
 
     if (changes['attachOutsideOnClick'] || changes['exclude']) {
       this._init();
@@ -56,6 +64,7 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
     if (this.clickOutsideEvents !== '') {
       this._events = this.clickOutsideEvents.split(' ');
     }
+
     this._excludeCheck();
 
     if (this.attachOutsideOnClick) {
@@ -65,12 +74,10 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-  /** @internal */
   private _initOnClickBody() {
     this._events.forEach(e => document.body.addEventListener(e, this._onClickBody));
   }
 
-  /** @internal */
   private _excludeCheck() {
     if (this.exclude) {
       try {
@@ -79,9 +86,7 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
           this._nodesExcluded = nodes;
         }
       } catch (err) {
-        if (console) {
-          console.error('[ng-click-outside] Check your exclude selector syntax.', err);
-        }
+        console.error('[ng-click-outside] Check your exclude selector syntax.', err);
       }
     }
   }
@@ -100,7 +105,6 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-  /** @internal */
   private _shouldExclude(target): boolean {
     for (let i = 0; i < this._nodesExcluded.length; i++) {
       if (this._nodesExcluded[i].contains(target)) {
@@ -109,10 +113,5 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
     }
 
     return false;
-  }
-
-  /** @internal */
-  private _isBrowser(): boolean {
-    return typeof window !== 'undefined';
   }
 }

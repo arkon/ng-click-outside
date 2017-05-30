@@ -33,21 +33,22 @@
   "typings": "./lib/index.d.ts",
   "scripts": {
     "lint": "tslint --type-check --project tsconfig.json src/**/*.ts",
-    "build": "npm run lint && ngc",
+    "build": "npm run lint && rimraf lib && ngc",
     "prepublish": "npm run build"
   },
   "peerDependencies": {
     "@angular/core": ">=2.3.0"
   },
   "devDependencies": {
-    "@angular/common": "^4.0.3",
-    "@angular/compiler": "^4.0.3",
-    "@angular/compiler-cli": "^4.0.3",
-    "@angular/core": "^4.0.3",
-    "@angular/platform-browser": "^4.0.3",
-    "rxjs": "^5.3.0",
-    "tslint": "^5.1.0",
-    "typescript": "^2.2.2",
-    "zone.js": "^0.8.9"
+    "@angular/common": "^4.1.3",
+    "@angular/compiler": "^4.1.3",
+    "@angular/compiler-cli": "^4.1.3",
+    "@angular/core": "^4.1.3",
+    "@angular/platform-browser": "^4.1.3",
+    "rimraf": "^2.6.1",
+    "rxjs": "^5.4.0",
+    "tslint": "^5.3.2",
+    "typescript": "^2.3.3",
+    "zone.js": "^0.8.11"
   }
 }

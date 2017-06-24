@@ -17,15 +17,15 @@ body {
 }
 
 ::selection {
-  background-color: $green;
+  background-color: $brand;
   color: $white;
 }
 
 a {
-  color: $green;
+  color: $brand;
   text-decoration: none;
 
   &:hover {
-    border-bottom: 1px dotted $green;
+    border-bottom: 1px dotted $brand;
   }
 }

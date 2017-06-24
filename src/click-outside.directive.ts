@@ -2,19 +2,16 @@ import {
   Directive,
   ElementRef,
   EventEmitter,
-  Inject,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
   Output,
-  PLATFORM_ID,
   SimpleChanges
 } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
 
 @Directive({ selector: '[clickOutside]' })
-export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
+export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
   @Input() attachOutsideOnClick: boolean = false;
   @Input() exclude: string = '';
   @Input() excludeBeforeClick: boolean = false;
@@ -22,15 +19,13 @@ export class ClickOutsideDirective implements OnInit, OnDestroy, OnChanges {
 
   @Output() clickOutside: EventEmitter<Event> = new EventEmitter<Event>();
 
-  private _isBrowser: boolean;
-
   private _nodesExcluded: Array<HTMLElement> = [];
   private _events: Array<string> = ['click'];
 
-  constructor(
-    private _el: ElementRef,
-    @Inject(PLATFORM_ID) platformId: Object) {
-    this._isBrowser = isPlatformBrowser(platformId);
+  private _isBrowser: boolean;
+
+  constructor(private _el: ElementRef) {
+    this._isBrowser = new Function('try{return this===window;}catch(e){return false;}')();
 
     this._initOnClickBody = this._initOnClickBody.bind(this);
     this._onClickBody = this._onClickBody.bind(this);

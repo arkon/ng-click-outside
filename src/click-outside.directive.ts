@@ -12,6 +12,8 @@ import {
 
 @Directive({ selector: '[clickOutside]' })
 export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
+  private static _isBrowser: boolean;
+
   @Input() attachOutsideOnClick: boolean = false;
   @Input() exclude: string = '';
   @Input() excludeBeforeClick: boolean = false;
@@ -22,23 +24,23 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
   private _nodesExcluded: Array<HTMLElement> = [];
   private _events: Array<string> = ['click'];
 
-  private _isBrowser: boolean;
-
   constructor(private _el: ElementRef) {
-    this._isBrowser = new Function('try{return this===window;}catch(e){return false;}')();
+    if (ClickOutsideDirective._isBrowser === undefined) {
+      ClickOutsideDirective._isBrowser = new Function('try{return this===window;}catch(e){return false;}')();
+    }
 
     this._initOnClickBody = this._initOnClickBody.bind(this);
     this._onClickBody = this._onClickBody.bind(this);
   }
 
   ngOnInit() {
-    if (!this._isBrowser) { return; }
+    if (!ClickOutsideDirective._isBrowser) { return; }
 
     this._init();
   }
 
   ngOnDestroy() {
-    if (!this._isBrowser) { return; }
+    if (!ClickOutsideDirective._isBrowser) { return; }
 
     if (this.attachOutsideOnClick) {
       this._events.forEach(e => this._el.nativeElement.removeEventListener(e, this._initOnClickBody));
@@ -48,7 +50,7 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (!this._isBrowser) { return; }
+    if (!ClickOutsideDirective._isBrowser) { return; }
 
     if (changes['attachOutsideOnClick'] || changes['exclude']) {
       this._init();
@@ -101,8 +103,8 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
   }
 
   private _shouldExclude(target): boolean {
-    for (let i = 0; i < this._nodesExcluded.length; i++) {
-      if (this._nodesExcluded[i].contains(target)) {
+    for (let excludedNode of this._nodesExcluded) {
+      if (excludedNode.contains(target)) {
         return true;
       }
     }

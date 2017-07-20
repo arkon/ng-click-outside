@@ -74,7 +74,7 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
 
   private _initOnClickBody() {
     if (this.delayClickOutsideInit) {
-      setTimeout(this._initClickListeners);
+      setTimeout(this._initClickListeners.bind(this));
     } else {
       this._initClickListeners();
     }

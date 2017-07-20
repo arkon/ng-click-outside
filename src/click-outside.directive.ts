@@ -15,6 +15,7 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
   private static _isBrowser: boolean;
 
   @Input() attachOutsideOnClick: boolean = false;
+  @Input() delayClickOutsideInit: boolean = false;
   @Input() exclude: string = '';
   @Input() excludeBeforeClick: boolean = false;
   @Input() clickOutsideEvents: string = '';
@@ -72,6 +73,14 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
   }
 
   private _initOnClickBody() {
+    if (this.delayClickOutsideInit) {
+      setTimeout(this._initClickListeners);
+    } else {
+      this._initClickListeners();
+    }
+  }
+
+  private _initClickListeners() {
     this._events.forEach(e => document.body.addEventListener(e, this._onClickBody));
   }
 

@@ -58,7 +58,7 @@ export class AppComponent {
 
 | Property name | Type | Default | Description |
 | ------------- | ---- | ------- | ----------- |
-| `attachOutsideOnClick` | boolean | `false` | By default, the outside click event handler is automatically. You can explicitely set this to `true` so that the handler is only set when the element is clicked. The outside click event handler will then be removed after a click outside has occurred. |
+| `attachOutsideOnClick` | boolean | `false` | By default, the outside click event handler is automatically attached. Explicitely setting this to `true` sets the handler after the element is clicked. The outside click event handler will then be removed after a click outside has occurred. |
 | `delayClickOutsideInit` | boolean | `false` | Delays the initialization of the click outside handler. This may help for items that are conditionally shown ([see issue #13](https://github.com/arkon/ng-click-outside/issues/13)). |
 | `clickOutsideEvents` | string | `'click'` | Allows for a space-separated list of events to cause the trigger. For example, for additional mobile support: `[clickOutsideEvents]="'click touchstart'"`. |
 | `exclude` | string | | A comma-separated string of DOM element queries to exclude when clicking outside of the element. For example: `[exclude]="'button,.btn-primary'"`. |

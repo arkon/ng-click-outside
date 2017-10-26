@@ -66,7 +66,7 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
 
   private _init() {
     if (this.clickOutsideEvents !== '') {
-      this._events = this.clickOutsideEvents.split(' ');
+      this._events = this.clickOutsideEvents.split(',').map(e => e.trim());
     }
 
     this._excludeCheck();

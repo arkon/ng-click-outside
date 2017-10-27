@@ -2,15 +2,15 @@ import {
   Directive,
   ElementRef,
   EventEmitter,
+  Inject,
+  Injectable,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
   Output,
-  SimpleChanges,
-  Injectable,
-  Inject,
-  PLATFORM_ID
+  PLATFORM_ID,
+  SimpleChanges
 } from '@angular/core';
 
 import { isPlatformBrowser } from '@angular/common';
@@ -18,7 +18,6 @@ import { isPlatformBrowser } from '@angular/common';
 @Injectable()
 @Directive({ selector: '[clickOutside]' })
 export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
-
 
   @Input() attachOutsideOnClick: boolean = false;
   @Input() delayClickOutsideInit: boolean = false;
@@ -32,35 +31,32 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
   private _events: Array<string> = ['click'];
 
   constructor(private _el: ElementRef,
-              @Inject(PLATFORM_ID) protected platformId: Object) {
-
+              @Inject(PLATFORM_ID) private platformId: Object) {
     this._initOnClickBody = this._initOnClickBody.bind(this);
     this._onClickBody = this._onClickBody.bind(this);
   }
 
   ngOnInit() {
-    if (isPlatformBrowser(this.platformId)) {
-      this._init();
-    }
+    if (!isPlatformBrowser(this.platformId)) { return; }
+
+    this._init();
   }
 
   ngOnDestroy() {
-    if (isPlatformBrowser(this.platformId)) {
+    if (!isPlatformBrowser(this.platformId)) { return; }
 
-      if (this.attachOutsideOnClick) {
-        this._events.forEach(e => this._el.nativeElement.removeEventListener(e, this._initOnClickBody));
-      }
-
-      this._events.forEach(e => document.body.removeEventListener(e, this._onClickBody));
+    if (this.attachOutsideOnClick) {
+      this._events.forEach(e => this._el.nativeElement.removeEventListener(e, this._initOnClickBody));
     }
+
+    this._events.forEach(e => document.body.removeEventListener(e, this._onClickBody));
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (isPlatformBrowser(this.platformId)) {
+    if (!isPlatformBrowser(this.platformId)) { return; }
 
-      if (changes['attachOutsideOnClick'] || changes['exclude']) {
-        this._init();
-      }
+    if (changes['attachOutsideOnClick'] || changes['exclude']) {
+      this._init();
     }
   }
 

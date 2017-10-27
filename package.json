@@ -1,7 +1,7 @@
 {
   "name": "ng-click-outside",
   "version": "2.4.1",
-  "description": "Angular 2+ directive for handling click events outside an element.",
+  "description": "Angular 4+ directive for handling click events outside an element.",
   "repository": {
     "type": "git",
     "url": "https://github.com/arkon/ng-click-outside.git"
@@ -20,9 +20,7 @@
   "license": "MIT",
   "keywords": [
     "angular",
-    "angular2",
     "angular4",
-    "ng2",
     "ng4",
     "click",
     "event",
@@ -32,12 +30,13 @@
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
   "scripts": {
-    "lint": "tslint --type-check --project tsconfig.json src/**/*.ts",
+    "lint": "tslint --project tsconfig.json src/**/*.ts",
     "build": "npm run lint && rimraf lib && ngc",
     "prepublish": "npm run build"
   },
   "peerDependencies": {
-    "@angular/core": ">=2.3.0"
+    "@angular/common": ">=4.0.0",
+    "@angular/core": ">=4.0.0"
   },
   "devDependencies": {
     "@angular/common": "^4.4.6",

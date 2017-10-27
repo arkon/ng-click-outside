@@ -6,7 +6,7 @@
 
 *Formerly called [ng2-click-outside](https://github.com/arkon/ng2-click-outside)*
 
-Angular 2+ directive for handling click events outside an element. Useful for things like reacting to clicking
+Angular 4+ directive for handling click events outside an element. Useful for things like reacting to clicking
 outside of a dropdown menu or modal dialog.
 
 Like binding to a regular `click` event in a template, you can do something like this:
@@ -21,6 +21,8 @@ Like binding to a regular `click` event in a template, you can do something like
 ```shell
 npm install --save ng-click-outside
 ```
+
+**IMPORTANT**: If you're using a version of Angular prior to v4.0.0, you must use ng-click-outside v2.4.1 or earlier.
 
 
 ## Usage

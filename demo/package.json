@@ -18,11 +18,11 @@
     "node": ">=6"
   },
   "dependencies": {
-    "@angular/common": "^4.4.6",
-    "@angular/compiler": "^4.4.6",
-    "@angular/core": "^4.4.6",
-    "@angular/platform-browser": "^4.4.6",
-    "@angular/platform-browser-dynamic": "^4.4.6",
+    "@angular/common": "^5.0.0",
+    "@angular/compiler": "^5.0.0",
+    "@angular/core": "^5.0.0",
+    "@angular/platform-browser": "^5.0.0",
+    "@angular/platform-browser-dynamic": "^5.0.0",
     "es6-shim": "^0.35.3",
     "ng-click-outside": "file:../",
     "reflect-metadata": "^0.1.10",
@@ -35,13 +35,13 @@
     "extract-text-webpack-plugin": "^3.0.2",
     "gh-pages": "^1.0.0",
     "html-webpack-plugin": "^2.30.1",
-    "node-sass": "^4.5.3",
+    "node-sass": "^4.6.0",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
-    "ts-loader": "^3.1.0",
-    "typescript": "^2.5.3",
+    "ts-loader": "^3.1.1",
+    "typescript": "^2.6.1",
     "uglifyjs-webpack-plugin": "^1.0.1",
     "webpack": "^3.8.1",
-    "webpack-dev-server": "^2.9.3"
+    "webpack-dev-server": "^2.9.4"
   }
 }

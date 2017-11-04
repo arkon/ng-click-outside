@@ -12,7 +12,6 @@ import {
   PLATFORM_ID,
   SimpleChanges
 } from '@angular/core';
-
 import { isPlatformBrowser } from '@angular/common';
 
 @Injectable()

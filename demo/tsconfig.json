@@ -12,6 +12,9 @@
   "exclude": [
     "node_modules"
   ],
+  "angularCompilerOptions": {
+    "preserveWhitespaces": false
+  },
   "compileOnSave": false,
   "buildOnSave": false
 }

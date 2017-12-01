@@ -23,6 +23,7 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
   @Input() exclude: string = '';
   @Input() excludeBeforeClick: boolean = false;
   @Input() clickOutsideEvents: string = '';
+  @Input() clickOutsideEnabled: boolean = true;
 
   @Output() clickOutside: EventEmitter<Event> = new EventEmitter<Event>();
 
@@ -99,6 +100,10 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
   }
 
   private _onClickBody(ev: Event) {
+    if (!this.clickOutsideEnabled) {
+      return;
+    }
+
     if (this.excludeBeforeClick) {
       this._excludeCheck();
     }

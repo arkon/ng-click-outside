@@ -10,7 +10,8 @@ import {
   OnInit,
   Output,
   PLATFORM_ID,
-  SimpleChanges
+  SimpleChanges,
+  NgZone,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -31,6 +32,7 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
   private _events: Array<string> = ['click'];
 
   constructor(private _el: ElementRef,
+              private _ngZone: NgZone,
               @Inject(PLATFORM_ID) private platformId: Object) {
     this._initOnClickBody = this._initOnClickBody.bind(this);
     this._onClickBody = this._onClickBody.bind(this);
@@ -68,7 +70,9 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
     this._excludeCheck();
 
     if (this.attachOutsideOnClick) {
-      this._events.forEach(e => this._el.nativeElement.addEventListener(e, this._initOnClickBody));
+      this._ngZone.runOutsideAngular(() => {
+        this._events.forEach(e => this._el.nativeElement.addEventListener(e, this._initOnClickBody));
+      });
     } else {
       this._initOnClickBody();
     }
@@ -83,7 +87,9 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
   }
 
   private _initClickListeners() {
-    this._events.forEach(e => document.body.addEventListener(e, this._onClickBody));
+    this._ngZone.runOutsideAngular(() => {
+      this._events.forEach(e => document.body.addEventListener(e, this._onClickBody));
+    });
   }
 
   private _excludeCheck() {
@@ -109,7 +115,7 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
     }
 
     if (!this._el.nativeElement.contains(ev.target) && !this._shouldExclude(ev.target)) {
-      this.clickOutside.emit(ev);
+      this._ngZone.run(() => this.clickOutside.emit(ev));
 
       if (this.attachOutsideOnClick) {
         this._events.forEach(e => document.body.removeEventListener(e, this._onClickBody));

@@ -28,7 +28,9 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
   @Input() delayClickOutsideInit: boolean = false;
   @Input() exclude: string = '';
   @Input() excludeBeforeClick: boolean = false;
-  @Input() clickOutsideEvents: string = '';
+  @Input() set clickOutsideEvents(events: string) {
+    this._events = events.split(',').map(e => e.trim());
+  }
   @Input() clickOutsideEnabled: boolean = true;
 
   @Output() clickOutside: EventEmitter<Event> = new EventEmitter<Event>();
@@ -74,10 +76,6 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
 
   private _init() {
     this._beforeInit.next();
-
-    if (this.clickOutsideEvents !== '') {
-      this._events = this.clickOutsideEvents.split(',').map(e => e.trim());
-    }
 
     this._excludeCheck();
 

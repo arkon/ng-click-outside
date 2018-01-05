@@ -37,6 +37,7 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
 
   private _nodesExcluded: Array<HTMLElement> = [];
   private _events: Array<string> = ['click'];
+  private _isPlatformBrowser: boolean = isPlatformBrowser(this.platformId);
 
   private _beforeInit: Subject<void> = new Subject<void>();
   private _onDestroy: Subject<void> = new Subject<void>();
@@ -51,13 +52,13 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnInit() {
-    if (!isPlatformBrowser(this.platformId)) { return; }
+    if (!this._isPlatformBrowser) { return; }
 
     this._init();
   }
 
   ngOnDestroy() {
-    if (!isPlatformBrowser(this.platformId)) { return; }
+    if (!this._isPlatformBrowser) { return; }
 
     this._onDestroy.next();
     this._onDestroy.complete();
@@ -67,7 +68,7 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (!isPlatformBrowser(this.platformId)) { return; }
+    if (!this._isPlatformBrowser) { return; }
 
     if (changes['attachOutsideOnClick'] || changes['exclude']) {
       this._init();

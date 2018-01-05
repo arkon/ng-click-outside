@@ -140,11 +140,8 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
   }
 
   private _shouldExclude(target): boolean {
-    for (let excludedNode of this._nodesExcluded) {
-      if (excludedNode.contains(target)) {
-        return true;
-      }
-    }
+    return this._nodesExcluded.some(excludedNode => excludedNode.contains(target));
+  }
 
   private _listenAll(target:  'window' | 'document' | 'body' | any, ...eventNames: string[]): Observable<Event> {
     const sources = eventNames.map(eventName => {

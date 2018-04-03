@@ -25,11 +25,13 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
   @Input() excludeBeforeClick: boolean = false;
   @Input() clickOutsideEvents: string = '';
   @Input() clickOutsideEnabled: boolean = true;
+  @Input() emitOnBlur: boolean = false;
 
   @Output() clickOutside: EventEmitter<Event> = new EventEmitter<Event>();
 
   private _nodesExcluded: Array<HTMLElement> = [];
   private _events: Array<string> = ['click'];
+  private _windowBlurListener: any = this._onWindowBlur.bind(this);
 
   constructor(private _el: ElementRef,
               private _ngZone: NgZone,
@@ -52,12 +54,15 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
     }
 
     this._events.forEach(e => document.body.removeEventListener(e, this._onClickBody));
+    if (this.emitOnBlur) {
+      window.removeEventListener('blur', this._windowBlurListener);
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (!isPlatformBrowser(this.platformId)) { return; }
 
-    if (changes['attachOutsideOnClick'] || changes['exclude']) {
+    if (changes['attachOutsideOnClick'] || changes['exclude'] || changes['emitOnBlur']) {
       this._init();
     }
   }
@@ -75,6 +80,11 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
       });
     } else {
       this._initOnClickBody();
+    }
+    if (this.emitOnBlur) {
+      this._ngZone.runOutsideAngular(() => {
+        window.addEventListener('blur', this._windowBlurListener);
+      });
     }
   }
 
@@ -115,12 +125,24 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
     }
 
     if (!this._el.nativeElement.contains(ev.target) && !this._shouldExclude(ev.target)) {
-      this._ngZone.run(() => this.clickOutside.emit(ev));
+      this._emit(ev);
 
       if (this.attachOutsideOnClick) {
         this._events.forEach(e => document.body.removeEventListener(e, this._onClickBody));
       }
     }
+  }
+
+  private _onWindowBlur(ev: Event) {
+    setTimeout(() => {
+      if (!document.hidden) {
+        this._emit(ev);
+      }
+    });
+  }
+
+  private _emit(ev: Event) {
+    this._ngZone.run(() => this.clickOutside.emit(ev));
   }
 
   private _shouldExclude(target): boolean {

@@ -31,13 +31,13 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
 
   private _nodesExcluded: Array<HTMLElement> = [];
   private _events: Array<string> = ['click'];
-  private _windowBlurListener: any = this._onWindowBlur.bind(this);
 
   constructor(private _el: ElementRef,
               private _ngZone: NgZone,
               @Inject(PLATFORM_ID) private platformId: Object) {
     this._initOnClickBody = this._initOnClickBody.bind(this);
     this._onClickBody = this._onClickBody.bind(this);
+    this._onWindowBlur = this._onWindowBlur.bind(this);
   }
 
   ngOnInit() {
@@ -54,8 +54,9 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
     }
 
     this._events.forEach(e => document.body.removeEventListener(e, this._onClickBody));
+
     if (this.emitOnBlur) {
-      window.removeEventListener('blur', this._windowBlurListener);
+      window.removeEventListener('blur', this._onWindowBlur);
     }
   }
 
@@ -81,9 +82,10 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
     } else {
       this._initOnClickBody();
     }
+
     if (this.emitOnBlur) {
       this._ngZone.runOutsideAngular(() => {
-        window.addEventListener('blur', this._windowBlurListener);
+        window.addEventListener('blur', this._onWindowBlur);
       });
     }
   }
@@ -133,6 +135,12 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
     }
   }
 
+  /**
+   * Resolves problem with outside click on iframe
+   * @see https://github.com/arkon/ng-click-outside/issues/32
+   * @param {Event} ev
+   * @private
+   */
   private _onWindowBlur(ev: Event) {
     setTimeout(() => {
       if (!document.hidden) {

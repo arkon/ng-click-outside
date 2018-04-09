@@ -31,6 +31,7 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
 
   private _nodesExcluded: Array<HTMLElement> = [];
   private _events: Array<string> = ['click'];
+  private _isWindowBlurListenerSet: boolean = false;
 
   constructor(private _el: ElementRef,
               private _ngZone: NgZone,
@@ -55,7 +56,7 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
 
     this._events.forEach(e => document.body.removeEventListener(e, this._onClickBody));
 
-    if (this.emitOnBlur) {
+    if (this._isWindowBlurListenerSet) {
       window.removeEventListener('blur', this._onWindowBlur);
     }
   }
@@ -87,6 +88,7 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
       this._ngZone.runOutsideAngular(() => {
         window.addEventListener('blur', this._onWindowBlur);
       });
+      this._isWindowBlurListenerSet = true;
     }
   }
 

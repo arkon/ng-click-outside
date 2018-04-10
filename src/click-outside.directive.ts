@@ -34,7 +34,6 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
 
   private _nodesExcluded: Array<HTMLElement> = [];
   private _events: Array<string> = ['click'];
-  private _isWindowBlurListenerSet: boolean = false;
 
   constructor(
       private _el: ElementRef,
@@ -54,15 +53,9 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
   ngOnDestroy() {
     if (!isPlatformBrowser(this.platformId)) { return; }
 
-    if (this.attachOutsideOnClick) {
-      this._events.forEach(e => this._el.nativeElement.removeEventListener(e, this._initOnClickBody));
-    }
-
-    this._events.forEach(e => document.body.removeEventListener(e, this._onClickBody));
-
-    if (this._isWindowBlurListenerSet) {
-      window.removeEventListener('blur', this._onWindowBlur);
-    }
+    this._removeClickOutsideListener();
+    this._removeAttachOutsideOnClickListener();
+    this._removeWindowBlurListener();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -81,33 +74,22 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
     this._excludeCheck();
 
     if (this.attachOutsideOnClick) {
-      this._ngZone.runOutsideAngular(() => {
-        this._events.forEach(e => this._el.nativeElement.addEventListener(e, this._initOnClickBody));
-      });
+      this._initAttachOutsideOnClickListener();
     } else {
       this._initOnClickBody();
     }
 
     if (this.emitOnBlur) {
-      this._ngZone.runOutsideAngular(() => {
-        window.addEventListener('blur', this._onWindowBlur);
-      });
-      this._isWindowBlurListenerSet = true;
+      this._initWindowBlurListener();
     }
   }
 
   private _initOnClickBody() {
     if (this.delayClickOutsideInit) {
-      setTimeout(this._initClickListeners.bind(this));
+      setTimeout(this._initClickOutsideListener.bind(this));
     } else {
-      this._initClickListeners();
+      this._initClickOutsideListener();
     }
-  }
-
-  private _initClickListeners() {
-    this._ngZone.runOutsideAngular(() => {
-      this._events.forEach(e => document.body.addEventListener(e, this._onClickBody));
-    });
   }
 
   private _excludeCheck() {
@@ -134,7 +116,7 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
       this._emit(ev);
 
       if (this.attachOutsideOnClick) {
-        this._events.forEach(e => document.body.removeEventListener(e, this._onClickBody));
+        this._removeClickOutsideListener();
       }
     }
   }
@@ -166,4 +148,41 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
 
     return false;
   }
+
+  private _initClickOutsideListener() {
+    this._ngZone.runOutsideAngular(() => {
+      this._events.forEach(e => document.body.addEventListener(e, this._onClickBody));
+    });
+  }
+
+  private _removeClickOutsideListener() {
+    this._ngZone.runOutsideAngular(() => {
+      this._events.forEach(e => document.body.removeEventListener(e, this._onClickBody));
+    });
+  }
+
+  private _initAttachOutsideOnClickListener() {
+    this._ngZone.runOutsideAngular(() => {
+      this._events.forEach(e => this._el.nativeElement.addEventListener(e, this._initOnClickBody));
+    });
+  }
+
+  private _removeAttachOutsideOnClickListener() {
+    this._ngZone.runOutsideAngular(() => {
+      this._events.forEach(e => this._el.nativeElement.removeEventListener(e, this._initOnClickBody));
+    });
+  }
+
+  private _initWindowBlurListener() {
+    this._ngZone.runOutsideAngular(() => {
+      window.addEventListener('blur', this._onWindowBlur);
+    });
+  }
+
+  private _removeWindowBlurListener() {
+    this._ngZone.runOutsideAngular(() => {
+      window.removeEventListener('blur', this._onWindowBlur);
+    });
+  }
+
 }

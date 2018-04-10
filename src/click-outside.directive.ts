@@ -19,13 +19,16 @@ import { isPlatformBrowser } from '@angular/common';
 @Directive({ selector: '[clickOutside]' })
 export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
 
+  @Input() clickOutsideEnabled: boolean = true;
+
   @Input() attachOutsideOnClick: boolean = false;
   @Input() delayClickOutsideInit: boolean = false;
+  @Input() emitOnBlur: boolean = false;
+
   @Input() exclude: string = '';
   @Input() excludeBeforeClick: boolean = false;
+
   @Input() clickOutsideEvents: string = '';
-  @Input() clickOutsideEnabled: boolean = true;
-  @Input() emitOnBlur: boolean = false;
 
   @Output() clickOutside: EventEmitter<Event> = new EventEmitter<Event>();
 
@@ -33,9 +36,10 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
   private _events: Array<string> = ['click'];
   private _isWindowBlurListenerSet: boolean = false;
 
-  constructor(private _el: ElementRef,
-              private _ngZone: NgZone,
-              @Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(
+      private _el: ElementRef,
+      private _ngZone: NgZone,
+      @Inject(PLATFORM_ID) private platformId: Object) {
     this._initOnClickBody = this._initOnClickBody.bind(this);
     this._onClickBody = this._onClickBody.bind(this);
     this._onWindowBlur = this._onWindowBlur.bind(this);
@@ -120,9 +124,7 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
   }
 
   private _onClickBody(ev: Event) {
-    if (!this.clickOutsideEnabled) {
-      return;
-    }
+    if (!this.clickOutsideEnabled) { return; }
 
     if (this.excludeBeforeClick) {
       this._excludeCheck();
@@ -140,8 +142,6 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
   /**
    * Resolves problem with outside click on iframe
    * @see https://github.com/arkon/ng-click-outside/issues/32
-   * @param {Event} ev
-   * @private
    */
   private _onWindowBlur(ev: Event) {
     setTimeout(() => {

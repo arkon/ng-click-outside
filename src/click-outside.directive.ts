@@ -152,6 +152,8 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
   }
 
   private _emit(ev: Event) {
+    if (!this.clickOutsideEnabled) { return; }
+
     this._ngZone.run(() => this.clickOutside.emit(ev));
   }
 

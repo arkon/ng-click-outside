@@ -7,7 +7,8 @@ import { Component } from '@angular/core';
       (click)="onClick($event)"
       (clickOutside)="onClickedOutside($event)"
       [attachOutsideOnClick]="attachOutsideOnClick"
-      [clickOutsideEnabled]="enabled">
+      [clickOutsideEnabled]="enabled"
+      [emitOnBlur]="true">
       <p>Clicked inside: {{countInside}}</p>
       <p>Clicked outside: {{countOutside}}</p>
 

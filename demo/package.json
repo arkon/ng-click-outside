@@ -18,29 +18,29 @@
     "node": ">=6"
   },
   "dependencies": {
-    "@angular/common": "^5.0.3",
-    "@angular/compiler": "^5.0.3",
-    "@angular/core": "^5.0.3",
-    "@angular/platform-browser": "^5.0.3",
-    "@angular/platform-browser-dynamic": "^5.0.3",
+    "@angular/common": "^6.0.2",
+    "@angular/compiler": "^6.0.2",
+    "@angular/core": "^6.0.2",
+    "@angular/platform-browser": "^6.0.2",
+    "@angular/platform-browser-dynamic": "^6.0.2",
     "es6-shim": "^0.35.3",
     "ng-click-outside": "file:..",
-    "reflect-metadata": "^0.1.10",
-    "rxjs": "^5.5.2",
-    "zone.js": "^0.8.18"
+    "reflect-metadata": "^0.1.12",
+    "rxjs": "^6.1.0",
+    "zone.js": "^0.8.26"
   },
   "devDependencies": {
-    "copy-webpack-plugin": "^4.2.3",
-    "css-loader": "^0.28.7",
+    "copy-webpack-plugin": "^4.5.1",
+    "css-loader": "^0.28.11",
     "extract-text-webpack-plugin": "^3.0.2",
     "gh-pages": "^1.1.0",
     "html-webpack-plugin": "^2.30.1",
-    "node-sass": "^4.7.2",
+    "node-sass": "^4.9.0",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
     "ts-loader": "^3.2.0",
-    "typescript": "^2.4.2",
-    "uglifyjs-webpack-plugin": "^1.1.2",
+    "typescript": "~2.7.2",
+    "uglifyjs-webpack-plugin": "^1.2.5",
     "webpack": "^3.9.1",
     "webpack-dev-server": "^2.9.5"
   }

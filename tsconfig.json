@@ -8,8 +8,9 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "declaration": true,
+    "removeComments": true,
     "stripInternal": true,
-    "outDir": "lib/",
+    "outDir": "lib_commonjs/",
     "lib": ["dom", "es5", "es2015.core", "es2015.collection", "es2015.iterable", "es2015.promise"]
   },
   "include": [
@@ -17,9 +18,9 @@
   ],
   "compileOnSave": false,
   "buildOnSave": false,
-  "angularCompilerOptions": {    
+  "angularCompilerOptions": {
     "decoratorsAs": "static fields",
-    "skipTemplateCodegen": true,    
+    "skipTemplateCodegen": true,
     "preserveWhitespaces": false
   }
 }

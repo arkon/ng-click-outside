@@ -38,19 +38,19 @@
     "prepare": "npm run build"
   },
   "peerDependencies": {
-    "@angular/common": ">=8.0.0",
-    "@angular/core": ">=8.0.0"
+    "@angular/common": ">=9.0.0",
+    "@angular/core": ">=9.0.0"
   },
   "devDependencies": {
     "@angular/common": "^8.2.14",
-    "@angular/compiler": "^8.2.14",
-    "@angular/compiler-cli": "^8.2.14",
+    "@angular/compiler": "^9.0.0",
+    "@angular/compiler-cli": "^9.0.0",
     "@angular/core": "^8.2.14",
-    "@angular/platform-browser": "^8.2.14",
-    "rimraf": "^3.0.0",
+    "@angular/platform-browser": "^9.0.0",
+    "rimraf": "^3.0.1",
     "rxjs": "^6.5.4",
-    "tslint": "^5.20.1",
-    "typescript": "~3.4.0",
-    "zone.js": "~0.9.1"
+    "tslint": "^6.0.0",
+    "typescript": "~3.7.5",
+    "zone.js": "~0.10.2"
   }
 }

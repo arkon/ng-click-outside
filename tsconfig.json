@@ -11,6 +11,7 @@
     "removeComments": true,
     "stripInternal": true,
     "outDir": "lib_commonjs/",
+    "rootDir": "src",
     "lib": ["dom", "es5", "es2015.core", "es2015.collection", "es2015.iterable", "es2015.promise"]
   },
   "include": [

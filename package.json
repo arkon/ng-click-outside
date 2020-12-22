@@ -1,14 +1,14 @@
 {
-  "name": "ng-click-outside",
-  "version": "7.0.1",
+  "name": "@fidian/ng-click-outside",
+  "version": "7.0.2",
   "description": "Angular directive for handling click events outside an element.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/arkon/ng-click-outside.git"
+    "url": "https://github.com/fidian/ng-click-outside.git"
   },
   "homepage": "http://echeung.me/ng-click-outside/",
   "bugs": {
-    "url": "https://github.com/arkon/ng-click-outside/issues"
+    "url": "https://github.com/fidian/ng-click-outside/issues"
   },
   "files": [
     "lib_commonjs/*",

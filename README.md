@@ -1,5 +1,9 @@
 # ng-click-outside
 
+⚠️　**This package is not actively maintained.** ⚠️
+
+---
+
 [![NPM](https://nodei.co/npm/ng-click-outside.png?compact=true)](https://nodei.co/npm/ng-click-outside/)
 
 **[Demo](https://echeung.me/ng-click-outside/)**

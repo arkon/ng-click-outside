@@ -22,6 +22,7 @@
   "angularCompilerOptions": {
     "decoratorsAs": "static fields",
     "skipTemplateCodegen": true,
-    "preserveWhitespaces": false
+    "preserveWhitespaces": false,
+    "enableIvy": false
   }
 }

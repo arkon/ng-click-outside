@@ -23,6 +23,6 @@
     "decoratorsAs": "static fields",
     "skipTemplateCodegen": true,
     "preserveWhitespaces": false,
-    "enableIvy": false
+    "compilationMode": "partial"
   }
 }

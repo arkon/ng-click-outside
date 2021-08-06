@@ -23,6 +23,7 @@
     "decoratorsAs": "static fields",
     "skipTemplateCodegen": true,
     "preserveWhitespaces": false,
-    "enableIvy": false
+    // https://angular.io/guide/creating-libraries#transitioning-libraries-to-partial-ivy-format
+    "compilationMode": "partial"
   }
 }

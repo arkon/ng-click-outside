@@ -1,6 +1,6 @@
 {
   "name": "ng-click-outside",
-  "version": "9.0.0",
+  "version": "0.0.0",
   "description": "Angular directive for handling click events outside an element.",
   "repository": {
     "type": "git",
@@ -10,12 +10,6 @@
   "bugs": {
     "url": "https://github.com/arkon/ng-click-outside/issues"
   },
-  "files": [
-    "lib_commonjs/*",
-    "lib_esmodule/*",
-    "README.md",
-    "LICENSE"
-  ],
   "author": "Eugene Cheung",
   "license": "MIT",
   "keywords": [
@@ -26,31 +20,28 @@
     "outside",
     "handler"
   ],
-  "main": "./lib_commonjs/index.js",
-  "module": "./lib_esmodule/index.js",
-  "jsnext:main": "./lib_esmodule/index.js",
-  "typings": "./lib_commonjs/index.d.ts",
+  "private": true,
   "scripts": {
+    "ng-packagr": "ng-packagr",
     "lint": "tslint --project tsconfig.json src/**/*.ts",
-    "build:commonjs": "rimraf lib_commonjs && ngc -p tsconfig.json",
-    "build:esmodule": "rimraf lib_esmodule && ngc -p tsconfig.module.json",
-    "build": "npm run lint && npm run build:commonjs && npm run build:esmodule",
+    "build:ng-packagr": "ng-packagr -p src/package.json",
+    "build": "npm run lint && npm run build:ng-packagr",
+    "postbuild": "cpy README.md LICENSE dist",
     "prepare": "npm run build"
   },
-  "peerDependencies": {
-    "@angular/common": ">=12.0.0",
-    "@angular/core": ">=12.0.0"
-  },
   "devDependencies": {
-    "@angular/common": "^12.1.4",
-    "@angular/compiler": "^12.1.4",
-    "@angular/compiler-cli": "^12.1.4",
-    "@angular/core": "^12.1.4",
-    "@angular/platform-browser": "^12.1.4",
+    "@angular/common": "~13.0.0",
+    "@angular/compiler": "~13.0.0",
+    "@angular/compiler-cli": "~13.0.0",
+    "@angular/core": "~13.0.0",
+    "@angular/platform-browser": "~13.0.0",
+    "cpy-cli": "^3.1.1",
+    "ng-packagr": "^13.0.3",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.6",
+    "tslib": "^2.3.1",
     "tslint": "~6.1.3",
-    "typescript": "4.3.5",
+    "typescript": "~4.4.4",
     "zone.js": "~0.11.4"
   }
 }

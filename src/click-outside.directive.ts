@@ -84,7 +84,9 @@ export class ClickOutsideDirective implements OnInit, OnChanges, OnDestroy {
 
   private _initOnClickBody() {
     if (this.delayClickOutsideInit) {
-      setTimeout(this._initClickOutsideListener.bind(this));
+      this._ngZone.runOutsideAngular(() => {
+        setTimeout(this._initClickOutsideListener.bind(this));
+      });
     } else {
       this._initClickOutsideListener();
     }

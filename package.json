@@ -1,7 +1,7 @@
 {
   "name": "ng-click-outside",
   "version": "9.0.0",
-  "description": "Angular directive for handling click events outside an element.",
+  "description": "[DEPRECATED] Angular directive for handling click events outside an element.",
   "repository": {
     "type": "git",
     "url": "https://github.com/arkon/ng-click-outside.git"

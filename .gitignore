@@ -11,9 +11,8 @@ logs
 # Node files
 node_modules
 
-# Built files
-lib_commonjs/
-lib_esmodule/
+# Built demo & library files
+dist
 
-# Built demo files
-demo/dist
+# Angular cache
+/.angular/cache

@@ -1,29 +1,27 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "noUnusedParameters": true,
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "skipLibCheck": true,
+    "importHelpers": true,
     "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "skipDefaultLibCheck": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "declaration": true,
-    "removeComments": true,
-    "stripInternal": true,
-    "outDir": "lib_commonjs/",
-    "rootDir": "src",
-    "lib": ["dom", "es5", "es2015.core", "es2015.collection", "es2015.iterable", "es2015.promise"]
+    "target": "es2015",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "lib": ["ES2020", "DOM"],
   },
-  "include": [
-    "src/**/*"
-  ],
-  "compileOnSave": false,
-  "buildOnSave": false,
   "angularCompilerOptions": {
+    "strictTemplates": true,
     "decoratorsAs": "static fields",
     "skipTemplateCodegen": true,
     "preserveWhitespaces": false,
-    // https://angular.io/guide/creating-libraries#transitioning-libraries-to-partial-ivy-format
     "compilationMode": "partial"
-  }
+  },
+  "exclude": ["node_modules"]
 }
